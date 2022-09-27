@@ -1,10 +1,15 @@
 #!/usr/bin/python3
+""" Module that contains a function that returns an object by
+a JSON representation
 """
-Contains the function "append_wrtie"
-"""
+import json
 
 
-def append_write(filename="", text=""):
-    """returns the number of chars appended to "filename" from "text" """
-    with open(filename, 'a', encoding='utf=8') as f:
-        return f.write(text)
+def from_json_string(my_str):
+    """ Function that returns an object by a JSON representation
+    Args:
+        my_str: JSON representation
+    Raises:
+        Exception: when the string can't be decoded
+    """
+    return json.loads(my_str)
