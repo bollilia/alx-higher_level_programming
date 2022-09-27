@@ -1,18 +1,25 @@
 #!/usr/bin/python3
-"""add item"""
-
-
-import json
+"""module for task 7"""
 import sys
-import os.path
-
 save_to_json_file = __import__('5-save_to_json_file').save_to_json_file
 load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
 
-filename = "add_item.json"
-if os.path.isfile(filename):
-    obj = load_from_json_file(filename)
+dfile = "add_item.json"
+
+try:
+    with open(dfile, 'r') as f:
+        num = len(f.read())
+except FileNotFoundError:
+    f = open(dfile, 'w')
+    f.close()
+    num = 0
+
+if num == 0:
+    dlist = []
 else:
-    obj = []
-obj.extend(sys.argv[1:])
-save_to_json_file(obj, filename)
+    obj = load_from_json_file(dfile)
+    dlist = obj
+
+dlist = dlist + sys.argv[1:]
+
+save_to_json_file(dlist, dfile)
